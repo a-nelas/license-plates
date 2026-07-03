@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrículas Diplomáticas — Portugal</title>
+<meta name="description" content="Lista de códigos das matrículas diplomáticas em Portugal (CD, CC, FM, OI) e respetivos países e organizações.">
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1c2430;
+    --muted: #5b6572;
+    --accent: #b31217;
+    --border: #e2e6eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: linear-gradient(135deg, #0f2a43, #163d5f);
+    color: #fff;
+    padding: 2.5rem 1rem 2rem;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 .4rem; font-size: 1.8rem; }
+  header p { margin: 0; opacity: .85; }
+  main { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+  .card h2 { margin-top: 0; font-size: 1.2rem; }
+  .formats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: .75rem;
+    margin-top: .75rem;
+  }
+  .format {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .6rem .8rem;
+    background: #fafbfc;
+  }
+  .format b {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 .45rem;
+    margin-right: .4rem;
+    font-family: Consolas, monospace;
+  }
+  .plate-example {
+    text-align: center;
+    margin: 1rem 0 .25rem;
+  }
+  .plate {
+    display: inline-block;
+    background: #fff;
+    border: 3px solid #111;
+    border-radius: 8px;
+    padding: .35rem 1rem;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    color: #b31217;
+  }
+  .plate-note { color: var(--muted); font-size: .85rem; text-align: center; margin-top: .35rem; }
+  #search {
+    width: 100%;
+    padding: .65rem .9rem;
+    font-size: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: .5rem .75rem; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: #f0f2f5; position: sticky; top: 0; }
+  td.code { font-family: Consolas, monospace; font-weight: 700; color: var(--accent); width: 4.5rem; }
+  tr:hover td { background: #f7f9fb; }
+  .count { color: var(--muted); font-size: .9rem; margin-bottom: .5rem; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    padding: 1rem;
+  }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <h1>🇵🇹 Matrículas Diplomáticas em Portugal</h1>
+  <p>Códigos de países e organizações nas chapas de matrícula diplomáticas portuguesas</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Formato da matrícula</h2>
+    <p>As matrículas diplomáticas portuguesas têm o formato <strong>XX-NNN-NN</strong>: duas letras que indicam o estatuto, seguidas do código do país ou organização (três dígitos) e de um número de série.</p>
+    <div class="plate-example">
+      <span class="plate">CD-060-12</span>
+      <div class="plate-note">Exemplo: veículo do corpo diplomático de França (código 060)</div>
+    </div>
+    <div class="formats">
+      <div class="format"><b>CD</b>Corpo Diplomático</div>
+      <div class="format"><b>CC</b>Corpo Consular</div>
+      <div class="format"><b>FM</b>Funcionário em Missão</div>
+      <div class="format"><b>OI</b>Organização Internacional</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Lista de códigos</h2>
+    <input type="search" id="search" placeholder="Pesquisar por código ou país… (ex.: 060 ou França)" aria-label="Pesquisar">
+    <div class="count" id="count"></div>
+    <table>
+      <thead><tr><th>Código</th><th>País / Organização</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </section>
+</main>
+<footer>
+  Fonte: <a href="https://myusefultools.com/pt/matriculas/portugal/diplomaticas/" rel="noopener">myusefultools.com</a>
+</footer>
+<script>
+const DATA = [
+  ["001","🇦🇫 Afeganistão"],
+  ["002","🇿🇦 África do Sul"],
+  ["003","🇦🇱 Albânia"],
+  ["004","República Democrática Alemã (obsoleto)"],
+  ["005","🇩🇪 Alemanha"],
+  ["006","🇦🇩 Andorra"],
+  ["007","🇦🇴 Angola"],
+  ["008","🇦🇬 Antígua e Barbuda"],
+  ["009","🇸🇦 Arábia Saudita"],
+  ["010","🇩🇿 Argélia"],
+  ["011","🇦🇷 Argentina"],
+  ["012","🇦🇺 Austrália"],
+  ["013","🇦🇹 Áustria"],
+  ["014","🇧🇸 Bahamas"],
+  ["015","🇧🇭 Barém"],
+  ["016","🇧🇩 Bangladeche"],
+  ["017","🇧🇧 Barbados"],
+  ["018","🇧🇪 Bélgica"],
+  ["019","🇧🇿 Belize"],
+  ["020","🇧🇯 Benim"],
+  ["021","🇲🇲 Mianmar (Birmânia)"],
+  ["022","🇧🇴 Bolívia"],
+  ["023","🇧🇼 Botsuana"],
+  ["024","🇧🇷 Brasil"],
+  ["025","🇧🇬 Bulgária"],
+  ["026","🇧🇫 Burquina Faso"],
+  ["027","🇧🇮 Burúndi"],
+  ["028","🇧🇹 Butão"],
+  ["029","🇨🇻 Cabo Verde"],
+  ["030","🇨🇲 Camarões"],
+  ["031","🇨🇦 Canadá"],
+  ["032","🇨🇫 República Centro-Africana"],
+  ["033","🇹🇩 Chade"],
+  ["034","🇨🇿 República Checa"],
+  ["035","🇨🇱 Chile"],
+  ["036","🇨🇳 China"],
+  ["037","🇨🇾 Chipre"],
+  ["038","🇨🇴 Colômbia"],
+  ["039","❓ Desconhecido"],
+  ["040","🇨🇩 República Democrática do Congo"],
+  ["041","🇰🇷 Coreia do Sul"],
+  ["042","🇰🇵 Coreia do Norte"],
+  ["043","🇨🇮 Costa do Marfim"],
+  ["044","🇨🇷 Costa Rica"],
+  ["045","🇭🇷 Croácia"],
+  ["046","🇨🇺 Cuba"],
+  ["047","🇩🇰 Dinamarca"],
+  ["048","🇩🇲 Domínica"],
+  ["049","🇩🇴 República Dominicana"],
+  ["050","🇪🇬 Egito"],
+  ["051","🇸🇻 El Salvador"],
+  ["052","🇦🇪 Emirados Árabes Unidos"],
+  ["053","🇪🇨 Equador"],
+  ["054","🇪🇸 Espanha"],
+  ["055","🇺🇸 Estados Unidos da América"],
+  ["056","🇸🇰 Eslováquia"],
+  ["057","🇸🇮 Eslovénia"],
+  ["058","🇵🇭 Filipinas"],
+  ["059","🇫🇮 Finlândia"],
+  ["060","🇫🇷 França"],
+  ["061","🇬🇦 Gabão"],
+  ["062","🇬🇲 Gâmbia"],
+  ["063","🇬🇭 Gana"],
+  ["064","🇬🇩 Granada"],
+  ["065","🇬🇷 Grécia"],
+  ["066","🇬🇹 Guatemala"],
+  ["067","🇬🇾 Guiana"],
+  ["068","🇬🇳 Guiné"],
+  ["069","🇬🇼 Guiné-Bissau"],
+  ["070","🇬🇶 Guiné Equatorial"],
+  ["071","🇭🇹 Haiti"],
+  ["072","🇭🇳 Honduras"],
+  ["073","🇭🇺 Hungria"],
+  ["074","🇮🇳 Índia"],
+  ["075","🇮🇩 Indonésia"],
+  ["076","🇮🇷 Irão"],
+  ["077","🇮🇶 Iraque"],
+  ["078","🇮🇪 Irlanda"],
+  ["079","🇮🇸 Islândia"],
+  ["080","🇮🇱 Israel"],
+  ["081","🇮🇹 Itália"],
+  ["082","🇯🇲 Jamaica"],
+  ["083","🇯🇵 Japão"],
+  ["084","🇩🇯 Jibuti"],
+  ["085","🇯🇴 Jordânia"],
+  ["086","🇰🇭 Camboja"],
+  ["087","🇰🇼 Kuwait"],
+  ["088","🇱🇦 Laos"],
+  ["089","🇱🇸 Lesoto"],
+  ["090","🇱🇻 Letónia"],
+  ["091","🇱🇧 Líbano"],
+  ["092","🇱🇷 Libéria"],
+  ["093","🇱🇾 Líbia"],
+  ["094","🇱🇮 Liechtenstein"],
+  ["095","🇱🇺 Luxemburgo"],
+  ["096","🇲🇬 Madagáscar"],
+  ["097","🇲🇾 Malásia"],
+  ["098","🇲🇼 Maláui"],
+  ["099","🇲🇻 Maldivas"],
+  ["100","🇲🇱 Mali"],
+  ["101","Ordem Soberana e Militar de Malta (SMOM)"],
+  ["102","🇲🇹 Malta"],
+  ["103","🇲🇦 Marrocos"],
+  ["104","🇲🇺 Maurícia"],
+  ["105","🇲🇷 Mauritânia"],
+  ["106","🇲🇽 México"],
+  ["107","🇲🇿 Moçambique"],
+  ["108","🇲🇨 Mónaco"],
+  ["109","🇲🇳 Mongólia"],
+  ["110","🇳🇦 Namíbia"],
+  ["111","🇳🇵 Nepal"],
+  ["112","🇳🇮 Nicarágua"],
+  ["113","🇳🇪 Níger"],
+  ["114","🇳🇬 Nigéria"],
+  ["115","🇳🇴 Noruega"],
+  ["116","🇳🇿 Nova Zelândia"],
+  ["117","🇴🇲 Omã"],
+  ["118","🇳🇱 Países Baixos"],
+  ["119","🇵🇦 Panamá"],
+  ["120","🇵🇬 Papua-Nova Guiné"],
+  ["121","🇵🇰 Paquistão"],
+  ["122","🇵🇾 Paraguai"],
+  ["123","🇵🇪 Peru"],
+  ["124","🇵🇱 Polónia"],
+  ["125","🇶🇦 Catar"],
+  ["126","🇰🇪 Quénia"],
+  ["127","🇬🇧 Reino Unido"],
+  ["128","🇷🇴 Roménia"],
+  ["129","🇷🇼 Ruanda"],
+  ["130","🇸🇧 Ilhas Salomão"],
+  ["131","🇱🇨 Santa Lúcia"],
+  ["132","🇸🇲 São Marino"],
+  ["133","🇰🇳 São Cristóvão e Neves"],
+  ["134","🇻🇦 Vaticano (Santa Sé)"],
+  ["135","🇸🇹 São Tomé e Príncipe"],
+  ["136","🇸🇨 Seicheles"],
+  ["137","🇸🇳 Senegal"],
+  ["138","🇷🇸 Sérvia"],
+  ["139","🇸🇱 Serra Leoa"],
+  ["140","🇸🇬 Singapura"],
+  ["141","🇸🇾 Síria"],
+  ["142","🇸🇴 Somália"],
+  ["143","🇱🇰 Sri Lanca"],
+  ["144","🇸🇸 Sudão do Sul"],
+  ["145","🇸🇩 Sudão"],
+  ["146","🇸🇪 Suécia"],
+  ["147","🇨🇭 Suíça"],
+  ["148","🇸🇷 Suriname"],
+  ["149","🇹🇭 Tailândia"],
+  ["150","🇹🇿 Tanzânia"],
+  ["151","🇹🇼 Taiwan"],
+  ["152","🇹🇬 Togo"],
+  ["153","🇹🇴 Tonga"],
+  ["154","🇹🇹 Trindade e Tobago"],
+  ["155","🇹🇳 Tunísia"],
+  ["156","🇹🇷 Turquia"],
+  ["157","🇺🇬 Uganda"],
+  ["158","🇷🇺 Rússia"],
+  ["159","🇺🇾 Uruguai"],
+  ["160","🇻🇺 Vanuatu"],
+  ["161","🇻🇪 Venezuela"],
+  ["162","🇻🇳 Vietname"],
+  ["163","🇾🇪 Iémen"],
+  ["164","Antigo Iémen do Sul (obsoleto)"],
+  ["165","🇨🇬 República do Congo"],
+  ["166","🇿🇲 Zâmbia"],
+  ["167","🇿🇼 Zimbabué"],
+  ["191","❓ Desconhecido"],
+  ["194","🇵🇸 Palestina"],
+  ["196","🇹🇱 Timor-Leste"],
+  ["197","🇺🇳 ONU (Organização das Nações Unidas)"],
+  ["198","🇺🇳 ONU (Organização das Nações Unidas)"],
+  ["199","NATO (Organização do Tratado do Atlântico Norte)"],
+  ["200","🇪🇺 União Europeia / Comissão Europeia"],
+  ["201","❓ Desconhecido"],
+  ["202","❓ Desconhecido"],
+  ["203","🇪🇺 Conselho da Europa"],
+  ["206","🇪🇺 EMSA (Agência Europeia para a Segurança Marítima)"]
+];
+
+const tbody = document.getElementById("tbody");
+const count = document.getElementById("count");
+const search = document.getElementById("search");
+
+function normalize(s) {
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
+function render(filter) {
+  const q = normalize(filter || "");
+  tbody.innerHTML = "";
+  let shown = 0;
+  for (const [code, name] of DATA) {
+    if (q && !code.includes(q) && !normalize(name).includes(q)) continue;
+    const tr = document.createElement("tr");
+    const tdCode = document.createElement("td");
+    tdCode.className = "code";
+    tdCode.textContent = code;
+    const tdName = document.createElement("td");
+    tdName.textContent = name;
+    tr.append(tdCode, tdName);
+    tbody.appendChild(tr);
+    shown++;
+  }
+  count.textContent = shown + " de " + DATA.length + " códigos";
+}
+
+search.addEventListener("input", () => render(search.value));
+render();
+</script>
+</body>
+</html>
