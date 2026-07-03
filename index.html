@@ -92,13 +92,6 @@
   td.code { font-family: Consolas, monospace; font-weight: 700; color: var(--accent); width: 4.5rem; }
   tr:hover td { background: #f7f9fb; }
   .count { color: var(--muted); font-size: .9rem; margin-bottom: .5rem; }
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: .85rem;
-    padding: 1rem;
-  }
-  footer a { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -109,19 +102,16 @@
 <main>
   <section class="card">
     <h2>Formato da matrícula</h2>
-    <p>As matrículas diplomáticas portuguesas têm o formato <strong>XX-NNN</strong>: duas letras que indicam a categoria do titular, seguidas do código do país ou organização (três dígitos). A cada categoria de pessoal da Missão corresponde um identificador (IDC):</p>
+    <p>As matrículas diplomáticas portuguesas têm fundo branco com letras, números e traços a vermelho, bem como um rebordo vermelho. As duas letras inseridas no fundo branco correspondem à categoria do titular e ao tipo, da seguinte forma:</p>
     <div class="plate-example">
       <span class="plate">000 - CD000</span>
       <div class="plate-note">Exemplo: veículo do corpo diplomático com o código 000</div>
     </div>
     <div class="formats">
-      <div class="format"><b>CD</b>Chefe de Missão e pessoal diplomático</div>
-      <div class="format"><b>CC</b>Pessoal consular</div>
-      <div class="format"><b>FM</b>Pessoal administrativo e técnico</div>
-      <div class="format"><b>PA</b>Pessoal auxiliar (pessoal de serviço e outros)</div>
-      <div class="format"><b>CH</b>Cônsules honorários</div>
-      <div class="format"><b>CF</b>Pessoal local</div>
-      <div class="format"><b>OI</b>Organizações Internacionais</div>
+      <div class="format"><b>CD</b>Missões Diplomáticas, Organizações Internacionais com sede ou representação em Portugal, membros diplomáticos e outros agentes diplomáticos</div>
+      <div class="format"><b>CC</b>Missões Consulares, membros diplomáticos e outros agentes diplomáticos com funções num Consulado ou posto consular</div>
+      <div class="format"><b>FM</b>Pessoal administrativo e técnico das Missões diplomáticas e consulares e das Organizações Internacionais com sede ou representação em Portugal</div>
+      <div class="format"><b>OI</b>Organizações Internacionais (matrículas OI a implementar brevemente)</div>
     </div>
   </section>
 
@@ -135,9 +125,6 @@
     </table>
   </section>
 </main>
-<footer>
-  Fonte: <a href="https://myusefultools.com/pt/matriculas/portugal/diplomaticas/" rel="noopener">myusefultools.com</a>
-</footer>
 <script>
 const DATA = [
   ["001","🇦🇫 Afeganistão"],
